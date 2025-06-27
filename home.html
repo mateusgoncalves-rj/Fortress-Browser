@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortress Browser - Página Inicial</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <style>
+        /* Variáveis CSS para fácil personalização de cores */
+        :root {
+            --bg-color: #1a1a1a; /* Fundo muito escuro, quase preto */
+            --text-color: #cccccc; /* Texto cinza claro, suave */
+            --input-bg: #2b2b2b; /* Fundo da barra de pesquisa */
+            --input-border: #444444; /* Borda da barra de pesquisa */
+            --focus-color: #007acc; /* Azul clean e profissional para foco */
+            --logo-color: #ffffff; /* Branco puro para o logo */
+            --shadow-light: rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+            --shadow-strong: rgba(0, 0, 0, 0.5); /* Sombra mais forte no foco */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Fontes de sistema modernas e limpas */
+            display: flex;
+            flex-direction: column;
+            /* Alterado: Alinha o conteúdo ao início do flex container */
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            transition: background-color 0.4s ease; /* Transição sutil no fundo */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 700px;
+            padding: 20px; /* Padding interno para o container */
+            /* NOVO: Ajusta a margem superior para mover o conteúdo para cima */
+            margin-top: 15vh; /* 15% da altura da viewport, ajuste conforme necessário */
+            /* Opcional: Adicionar uma transição para a posição caso o tamanho da janela mude */
+            transition: margin-top 0.4s ease;
+        }
+
+        .browser-logo {
+            margin-bottom: 80px; /* Mais espaço acima da barra de pesquisa */
+            opacity: 0; /* Começa invisível para animação */
+            transform: translateY(-25px); /* Deslocamento inicial para a animação */
+            animation: fadeInSlideDown 0.8s ease-out forwards 0.2s; /* Animação de entrada */
+        }
+
+        .browser-logo h1 {
+            font-size: 4.5em; /* Tamanho grande mas elegante */
+            font-weight: 300; /* Leve, moderno */
+            color: var(--logo-color);
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px var(--shadow-light); /* Sombra suave para profundidade */
+        }
+
+        .search-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            opacity: 0; /* Começa invisível para animação */
+            transform: translateY(25px); /* Deslocamento inicial para a animação */
+            animation: fadeInSlideUp 0.8s ease-out forwards 0.4s; /* Animação de entrada */
+        }
+
+        .search-box-form {
+            display: flex;
+            align-items: center;
+            width: 75%; /* Largura um pouco menor para mais contenção */
+            max-width: 600px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border); /* Borda fina e discreta */
+            border-radius: 6px; /* Bordas ligeiramente arredondadas, não muito */
+            padding: 12px 20px;
+            box-shadow: 0 5px 15px var(--shadow-light); /* Sombra discreta */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .search-box-form:focus-within {
+            border-color: var(--focus-color); /* Borda colorida ao focar */
+            box-shadow: 0 6px 20px var(--shadow-strong), 0 0 0 3px rgba(0, 122, 204, 0.2); /* Sombra mais forte e leve brilho azul */
+            background-color: #333333; /* Fundo ligeiramente mais escuro ao focar */
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            color: var(--text-color);
+            opacity: 0.6; /* Ícone sutil */
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .search-box-form:focus-within .search-icon {
+            opacity: 0.9; /* Ícone mais visível ao focar */
+            color: var(--focus-color); /* Cor do ícone muda no foco */
+        }
+
+        .search-box-form input[type="text"] {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text-color);
+            font-size: 1.1em;
+            padding: 0;
+            caret-color: var(--focus-color); /* Cor do cursor */
+            line-height: 1.5; /* Para melhor espaçamento do texto */
+        }
+
+        .search-box-form input[type="text"]::placeholder {
+            color: var(--text-color);
+            opacity: 0.4; /* Placeholder bem discreto */
+        }
+
+        /* Animações */
+        @keyframes fadeInSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 10vh; /* Ajusta para telas menores */
+            }
+            .browser-logo h1 {
+                font-size: 3.5em;
+                margin-bottom: 60px;
+            }
+            .search-box-form {
+                width: 90%;
+                padding: 10px 18px;
+            }
+            .search-box-form input[type="text"] {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin-top: 8vh; /* Ajusta ainda mais para telas muito pequenas */
+            }
+            .browser-logo h1 {
+                font-size: 2.8em;
+                margin-bottom: 50px;
+                letter-spacing: 1px;
+            }
+            .search-box-form {
+                width: 95%;
+                padding: 8px 15px;
+            }
+            .search-box-form input[type="text"] {
+                font-size: 0.95em;
+            }
+            .search-icon {
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="browser-logo">
+            <h1>Fortress Browser</h1>
+        </div>
+
+        <div class="search-area">
+            <form action="https://duckduckgo.com/" method="get" class="search-box-form">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20.9999 21L16.6499 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <input type="text" name="q" placeholder="Pesquisar no DuckDuckGo..." autofocus>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
